@@ -13,11 +13,13 @@
 		"vii": "dist/index.js"
 	},
 	"devDependencies": {
+		"@types/minimist": "^1.2.2",
 		"@types/node": "^16.4.12",
 		"typescript": "^4.3.5"
 	},
 	"dependencies": {
 		"ascii-converter": "^1.1.5",
-		"jszip": "^3.7.0"
+		"jszip": "^3.7.0",
+		"minimist": "^1.2.5"
 	}
 }
