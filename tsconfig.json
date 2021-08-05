@@ -1,0 +1,15 @@
+{
+	"compilerOptions": {
+		"module": "CommonJS",
+		"target": "ES6",
+		"strict": true,
+		"strictNullChecks": true,
+		"removeComments": true,
+		"esModuleInterop": true,
+		"lib": ["ES2019"],
+		"forceConsistentCasingInFileNames": true,
+		"moduleResolution": "Node",
+		"skipLibCheck": true,
+		"outDir": "dist"
+	}
+}
