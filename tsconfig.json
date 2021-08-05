@@ -6,6 +6,7 @@
 		"strictNullChecks": true,
 		"removeComments": true,
 		"esModuleInterop": true,
+		"noImplicitAny": true,
 		"lib": ["ES2019"],
 		"forceConsistentCasingInFileNames": true,
 		"moduleResolution": "Node",
