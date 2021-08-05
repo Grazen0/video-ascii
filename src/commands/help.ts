@@ -8,7 +8,10 @@ export const help: Command = {
 	usage: '(command)',
 	execute(args) {
 		if (args.length === 0) {
-			const list = Object.values(commands).map(cmd => cmd.name);
+			const list = Object.values(commands)
+				.map(cmd => cmd.name)
+				.sort();
+
 			console.log(`Available commands: ${list.join(', ')}`);
 		} else {
 			const command = (commands as Record<string, Command>)[args[0]];
