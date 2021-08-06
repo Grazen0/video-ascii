@@ -19,7 +19,7 @@ tmp.setGracefulCleanup();
 
 export const convert: Command = {
 	name: 'convert',
-	description: 'Generates a .vii file with the provided video file path.',
+	description: 'Generates a .vii file from the provided video file path.',
 	usage: '[file]',
 	async execute([file]) {
 		if (!file) {
@@ -53,8 +53,8 @@ export const convert: Command = {
 		const dir = tmp.dirSync();
 
 		console.log('Extracting video frames...');
-		const images = await video.fnExtractFrameToJPG(dir.name);
-		images.sort((a, b) => getFrameIndex(a) - getFrameIndex(b));
+		const paths = await video.fnExtractFrameToJPG(dir.name);
+		paths.sort((a, b) => getFrameIndex(a) - getFrameIndex(b));
 
 		let {
 			fps,
@@ -77,7 +77,7 @@ export const convert: Command = {
 
 		console.log('Converting frames into ASCII...');
 		const frames = await Promise.all(
-			images.map(frame =>
+			paths.map(frame =>
 				ascii(frame, {
 					width: Math.floor(w),
 					height: Math.floor(h / 2),
