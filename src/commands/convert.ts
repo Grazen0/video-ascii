@@ -85,7 +85,6 @@ export const convert: Command = {
 				})
 			)
 		);
-		dir.removeCallback();
 
 		console.log('Zipping file...');
 		const zip = new JSZip();
