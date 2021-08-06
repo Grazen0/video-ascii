@@ -1,7 +1,8 @@
 import FFmpeg from 'ffmpeg';
 import ffmpegPath from 'ffmpeg-static';
 import ascii from 'ascii-converter';
-import fs from 'fs';
+import { existsSync } from 'fs';
+import fs from 'fs/promises';
 import { basename, resolve } from 'path';
 import tmp from 'tmp';
 import JSZip from 'jszip';
@@ -27,12 +28,12 @@ export const convert: Command = {
 		}
 
 		const path = resolve(file);
-		if (!fs.existsSync(path)) {
+		if (!existsSync(path)) {
 			throw new Error('The provided file path does not exist.');
 		}
 
 		const target = path.replace(/\.[^.]+$/, '') + '.vii';
-		if (fs.existsSync(resolve(target))) {
+		if (existsSync(resolve(target))) {
 			const ok = await yesno({
 				question: `The file "${basename(
 					target
@@ -104,7 +105,7 @@ export const convert: Command = {
 
 		console.log('Saving...');
 		const buf = await zip.generateAsync({ type: 'nodebuffer' });
-		fs.writeFileSync(target, buf);
+		await fs.writeFile(target, buf);
 
 		const mb = floorDecimals(buf.length / Math.pow(2, 20), 2);
 		console.log(`${mb} MB written to "${target}"`);
