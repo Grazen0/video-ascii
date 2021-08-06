@@ -3,9 +3,7 @@
 	"version": "1.0.0",
 	"main": "dist/index.js",
 	"scripts": {
-		"prepare": "npm run build",
-		"prestart": "npm run build",
-		"start": "node .",
+		"dev": "npm run build && node .",
 		"build": "tsc"
 	},
 	"license": "MIT",
