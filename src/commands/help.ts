@@ -6,7 +6,7 @@ export const help: Command = {
 	name: 'help',
 	description: 'Shows help',
 	usage: '(command)',
-	execute(args) {
+	async execute(args) {
 		if (args.length === 0) {
 			const list = Object.values(commands)
 				.map(cmd => cmd.name)

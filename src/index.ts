@@ -15,4 +15,7 @@ if (!command) {
 	process.exit(0);
 }
 
-command.execute(args);
+command.execute(args).catch(err => {
+	console.log('An error occurred:', err.message);
+	console.error(err);
+});
