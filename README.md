@@ -2,7 +2,7 @@
 
 A cool terminal app that converts videos into ASCII text and reproduces them.
 
-![Example](example.gif?raw=true)
+![Example](https://github.com/ElCholoGamer/video-ascii/blob/master/example.gif?raw=true)
 
 ## Installation
 
