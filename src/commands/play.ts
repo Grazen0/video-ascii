@@ -52,22 +52,24 @@ export const play: Command = {
 		const start = Date.now();
 
 		let time = 0;
-		let i = 0;
+		let index = 0;
 		let avg = 0;
 
 		function loop() {
-			if (++i >= frames.length) return;
+			if (++index >= frames.length) return;
 
 			time += msPerFrame;
 
+			// Schedule next render
 			const diff = Date.now() - start - time;
 			setTimeout(loop, msPerFrame - diff);
 
+			// Actual render
 			console.clear();
 			console.log(
-				`frame ${i} - innacuracy: ${Math.floor((avg = (avg + diff) / 2))}ms`
+				`frame ${index} - innacuracy: ${Math.floor((avg = (avg + diff) / 2))}ms`
 			);
-			console.log(frames[i]);
+			console.log(frames[index]);
 		}
 
 		loop();
