@@ -10,12 +10,12 @@ export const play: Command = {
 	name: 'play',
 	description: 'Plays the specified .vii file',
 	usage: '[file]',
-	async execute([file]) {
-		if (!file) {
+	async execute(args) {
+		if (args.length === 0) {
 			throw new Error('No file path provided.');
 		}
 
-		const path = resolve(file);
+		const path = resolve(args.join(' '));
 		if (!existsSync(path)) {
 			throw new Error('The provided file path does not exist.');
 		}
@@ -33,24 +33,43 @@ export const play: Command = {
 		const manifest = JSON.parse(manifestRaw);
 
 		// Extract frames
-		const framesFolder = zip.folder('frames')!;
-		const frameFiles = framesFolder.files;
+		const frameFiles: JSZip.JSZipObject[] = [];
+		zip.folder('frames')!.forEach((name, file) => frameFiles.push(file));
+
 		const frames = await Promise.all(
-			Object.values(frameFiles)
-				.slice(1)
-				.map(file => file.async('string'))
+			frameFiles.map(file => file.async('string'))
 		);
 
+		// Cool countdown
+		let count = 3;
+		while (count > 0) {
+			console.log(`Starting in ${count--}...`);
+			await sleep(1000);
+		}
+
 		// Reproduce video
-		const msPerFrame = (1 / manifest.fps) * 1000;
-		for (const frame of frames) {
-			const start = Date.now();
+		const msPerFrame = 1000 / manifest.fps;
+		const start = Date.now();
+
+		let time = 0;
+		let i = 0;
+		let avg = 0;
+
+		function loop() {
+			if (++i >= frames.length) return;
+
+			time += msPerFrame;
+
+			const diff = Date.now() - start - time;
+			setTimeout(loop, msPerFrame - diff);
 
 			console.clear();
-			console.log(frame);
-
-			const timeLeft = start + msPerFrame - Date.now();
-			if (timeLeft > 0) await sleep(timeLeft);
+			console.log(
+				`frame ${i} - innacuracy: ${Math.floor((avg = (avg + diff) / 2))}ms`
+			);
+			console.log(frames[i]);
 		}
+
+		loop();
 	},
 };
