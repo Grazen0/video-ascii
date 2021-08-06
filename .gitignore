@@ -3,4 +3,8 @@ dist
 
 .env*
 *.log
+
+# Testing files
 *.mp4
+*.zip
+*.vii
