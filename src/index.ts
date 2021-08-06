@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import minimist from 'minimist';
 import * as commands from './commands';
 import { RUN_COMMAND } from './constants';

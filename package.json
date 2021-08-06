@@ -8,7 +8,7 @@
 	},
 	"license": "MIT",
 	"bin": {
-		"vii": "dist/index.js"
+		"vii": "./dist/index.js"
 	},
 	"dependencies": {
 		"ascii-converter": "^1.1.5",
