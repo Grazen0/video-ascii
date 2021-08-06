@@ -15,3 +15,7 @@ export function floorDecimals(num: number, decimals: number) {
 	const inc = 10 ** decimals;
 	return Math.floor(num * inc) / inc;
 }
+
+export function sleep(ms: number): Promise<void> {
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
