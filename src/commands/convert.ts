@@ -22,12 +22,12 @@ export const convert: Command = {
 	name: 'convert',
 	description: 'Generates a .vii file from the provided video file path.',
 	usage: '[file]',
-	async execute([file]) {
-		if (!file) {
+	async execute(args) {
+		if (args.length === 0) {
 			throw new Error('No file path provided.');
 		}
 
-		const path = resolve(file);
+		const path = resolve(args.join(' '));
 		if (!existsSync(path)) {
 			throw new Error('The provided file path does not exist.');
 		}
@@ -35,7 +35,7 @@ export const convert: Command = {
 		const target = path.replace(/\.[^.]+$/, '') + '.vii';
 		if (existsSync(resolve(target))) {
 			const ok = await yesno({
-				question: `The file "${basename(
+				question: `The target file "${basename(
 					target
 				)}" already exists. Are you sure you want to overwrite it? [y/n]`,
 				invalid: () => {},
