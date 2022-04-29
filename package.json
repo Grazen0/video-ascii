@@ -15,7 +15,7 @@
 		"ffmpeg": "^0.0.4",
 		"ffmpeg-static": "^4.4.0",
 		"jszip": "^3.7.0",
-		"minimist": "^1.2.5",
+		"minimist": "^1.2.6",
 		"tmp": "^0.2.1",
 		"yesno": "^0.3.1"
 	},
